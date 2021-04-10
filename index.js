@@ -1,8 +1,10 @@
 'use strict';
 
 const express = require('express');
+const dotenv = require('dotenv');
 
 const app = express();
+dotenv.config();
 
 app.get('/', (req, res) => {
   res.send('hi');
@@ -10,5 +12,5 @@ app.get('/', (req, res) => {
 
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Todo api app listening at http://localhost:${port}`);
 });
