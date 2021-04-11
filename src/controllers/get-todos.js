@@ -12,7 +12,7 @@ function makeGetTodos({ listTodos }) {
         body: todos,
       };
     } catch (error) {
-      console.error(error);
+      console.log(error);
       return {
         headers,
         statusCode: 400,
