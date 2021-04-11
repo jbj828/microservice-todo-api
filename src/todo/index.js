@@ -2,7 +2,7 @@
 
 const { buildMakeTodo } = require('./todo');
 
-const makeTodo = buildMakeTodo();
+const makeTodo = buildMakeTodo({});
 
 module.exports = {
   makeTodo,

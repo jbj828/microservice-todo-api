@@ -1,6 +1,6 @@
 'use strict';
 
-function buildMakeTodo() {
+function buildMakeTodo({}) {
   return function makeTodo({ description, complete }) {
     if (!description) {
       throw new Error('Todo must have description');

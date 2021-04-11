@@ -2,16 +2,17 @@
 
 const express = require('express');
 const dotenv = require('dotenv');
-const makeCallback = require('./express-callback');
+const { makeExpressCallback } = require('./express-callback');
+const { getTodos } = require('./controllers');
 
 const app = express();
 dotenv.config();
 
-app.get(`${process.env.API_URL_PREFIX}/todos`, makeCallback());
-app.post(`${process.env.API_URL_PREFIX}/todos`, makeCallback());
-app.patch(`${process.env.API_URL_PREFIX}/todos/:id`, makeCallback());
-app.get(`${process.env.API_URL_PREFIX}/todos/:id`, makeCallback());
-app.delete(`${process.env.API_URL_PREFIX}/todos/:id`, makeCallback());
+app.get('/todos', makeExpressCallback(getTodos));
+app.post('/todos', makeExpressCallback());
+app.patch('/todos/:id', makeExpressCallback());
+app.get('/todos/:id', makeExpressCallback());
+app.delete('/todos/:id', makeExpressCallback());
 
 const port = 3000;
 app.listen(port, () => {

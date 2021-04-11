@@ -1,17 +1,19 @@
 'use strict';
 
+const dotenv = require('dotenv');
+const { makeTodosDb } = require('./todos-db');
 const mongoose = require('mongoose');
+const { Todo } = require('./schema');
+dotenv.config();
 
 const url = process.env.TODOS_DB_URL;
 const dbName = process.env.TODOS_DB_NAME;
 
 async function makeDb() {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(`${url}${dbName}`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
+  await mongoose.connect(`${url}${dbName}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
@@ -21,6 +23,8 @@ async function makeDb() {
   return db;
 }
 
+const todosDb = makeTodosDb({ makeDb, Todo });
+
 module.exports = {
-  makeDb,
+  todosDb,
 };

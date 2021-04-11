@@ -25,3 +25,7 @@ function makeExpressCallback(controller) {
       );
   };
 }
+
+module.exports = {
+  makeExpressCallback,
+};
