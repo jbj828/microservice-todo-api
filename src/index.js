@@ -1,12 +1,10 @@
 'use strict';
 
 const express = require('express');
-const dotenv = require('dotenv');
 const { makeExpressCallback } = require('./express-callback');
 const { getTodos } = require('./controllers');
 
 const app = express();
-dotenv.config();
 
 app.get('/todos', makeExpressCallback(getTodos));
 app.post('/todos', makeExpressCallback());
