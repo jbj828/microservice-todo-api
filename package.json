@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "start": "nodemon node src/index.js"
   },
   "repository": {
@@ -25,7 +25,11 @@
   "devDependencies": {
     "faker": "^5.5.3",
     "jest": "^26.6.3",
+    "mongodb-memory-server": "^6.9.6",
     "mongoose": "^5.12.3",
     "nodemon": "^2.0.7"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
