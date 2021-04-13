@@ -19,5 +19,8 @@ describe('list todos', () => {
 
     // Assert
     expect(res.todos).toEqual([]);
+
+    // Start from here!
+    // 1. jest의 global setup, global teardown을 공부하고, 그 내용에 맞게 설정을 하자.
   });
 });

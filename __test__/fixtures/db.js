@@ -22,20 +22,6 @@ async function disconnect() {
   await mongod.stop();
 }
 
-// async function makeDb() {
-//     await mongoose.connect(`${url}${dbName}`, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-
-//     const db = mongoose.connection;
-//     db.on('error', console.error.bind(console, 'connection error:'));
-//     db.once('open', () => {
-//       console.log('==> MongoDB Connected!');
-//     });
-//     return db;
-//   }
-
 async function makeDb() {
   await connect();
 }
