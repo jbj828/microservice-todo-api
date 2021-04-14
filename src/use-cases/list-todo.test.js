@@ -1,6 +1,5 @@
 'use strict';
 
-const { makeAddTodo } = require('../use-cases/add-todo');
 const { makeDb, disconnect } = require('../../__test__/fixtures/db');
 const { makeFakeTodo } = require('../../__test__/fixtures/todo');
 const { makeListTodos } = require('./list-todos');
@@ -13,19 +12,25 @@ describe('list todos', () => {
   it('get all todos', async () => {
     // Arrange
     const todosDb = await makeTodosDb({ makeDb, Todo });
-    const listTodos = await makeListTodos({ todosDb });
-    const addTodo = await makeAddTodo({ todosDb });
+    const listTodos = makeListTodos({ todosDb });
 
-    for (let i = 0; i < 3; i++) {
-      const fakeTodo = makeFakeTodo();
-      await addTodo({ fakeTodo });
-    }
+    const firstFakeTodo = makeFakeTodo();
+    const SecondFakeTodo = makeFakeTodo();
+    const thirdFakeTodo = makeFakeTodo();
+
+    const fakeTodos = [firstFakeTodo, SecondFakeTodo, thirdFakeTodo];
+    await Promise.all(
+      fakeTodos.map(async (todo) => {
+        await todosDb.insert({ todo });
+      })
+    );
 
     // Act
-    const res = await listTodos({});
-    console.log(res);
+    const res = await listTodos();
 
     // Assert
     expect(res.todos.length).toEqual(3);
+    expect(res.todos[0]).toHaveProperty('description');
+    expect(res.todos[0]).toHaveProperty('complete');
   });
 });

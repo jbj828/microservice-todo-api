@@ -2,8 +2,7 @@
 
 function makeAddTodo({ todosDb }) {
   return async function addTodo({ todo }) {
-    await todosDb.insert({ todo });
-    return;
+    return await todosDb.insert({ todo });
   };
 }
 
