@@ -1,3 +1,5 @@
+'use strict';
+
 function makeGetTodos({ listTodos }) {
   return async function getTodos(httpRequest) {
     const headers = {
@@ -12,7 +14,6 @@ function makeGetTodos({ listTodos }) {
         body: todos,
       };
     } catch (error) {
-      console.log(error);
       return {
         headers,
         statusCode: 400,

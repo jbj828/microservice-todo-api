@@ -6,7 +6,7 @@ const { makeFakeTodo } = require('../../__test__/fixtures/todo');
 const { makeTodosDb } = require('../data-access/todos-db');
 const { Todo } = require('../data-access/schema');
 
-describe('add todo', () => {
+describe('use-cases, add todo', () => {
   afterAll(() => disconnect());
 
   it('insert todo', async () => {

@@ -2,35 +2,30 @@
 
 const { makeDb, disconnect } = require('../../__test__/fixtures/db');
 const { makeFakeTodo } = require('../../__test__/fixtures/todo');
-const { makeListTodos } = require('./list-todos');
+const { makeListTodo } = require('./list-todo');
 const { makeTodosDb } = require('../data-access/todos-db');
 const { Todo } = require('../data-access/schema');
 
-describe('list todos', () => {
-  afterAll(async () => disconnect());
+describe('use-cases, get todo', () => {
+  afterAll(() => disconnect());
 
-  it('get all todos', async () => {
+  it('get todo', async () => {
     // Arrange
-    const todosDb = await makeTodosDb({ makeDb, Todo });
-    const listTodos = makeListTodos({ todosDb });
+    const todosDb = makeTodosDb({ makeDb, Todo });
+    const listTodo = makeListTodo({ todosDb });
+    const todo = makeFakeTodo({
+      description: 'this is test',
+      complete: false,
+    });
 
-    const firstFakeTodo = makeFakeTodo();
-    const SecondFakeTodo = makeFakeTodo();
-    const thirdFakeTodo = makeFakeTodo();
-
-    const fakeTodos = [firstFakeTodo, SecondFakeTodo, thirdFakeTodo];
-    await Promise.all(
-      fakeTodos.map(async (todo) => {
-        await todosDb.insert({ todo });
-      })
-    );
+    const fakeTodoInfo = await todosDb.insert({ todo });
+    const id = fakeTodoInfo._id;
 
     // Act
-    const res = await listTodos();
+    const res = await listTodo({ id });
 
     // Assert
-    expect(res.todos.length).toEqual(3);
-    expect(res.todos[0]).toHaveProperty('description');
-    expect(res.todos[0]).toHaveProperty('complete');
+    expect(res.description).toEqual('this is test');
+    expect(res.complete).toEqual(false);
   });
 });

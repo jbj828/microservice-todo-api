@@ -30,6 +30,7 @@
     "nodemon": "^2.0.7"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["./jest.setup.js"]
   }
 }
