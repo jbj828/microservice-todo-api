@@ -3,6 +3,7 @@
 const { addTodo } = require('../use-cases');
 const { listTodos } = require('../use-cases');
 const { listTodo } = require('../use-cases');
+const { notFound } = require('./not-found');
 const { makeGetTodos } = require('./get-todos');
 const { makeGetTodo } = require('./get-todo');
 const { makePostTodo } = require('./post-todo');
@@ -15,6 +16,7 @@ const todosController = Object.freeze({
   getTodos,
   getTodo,
   postTodo,
+  notFound,
 });
 
 module.exports = {
@@ -22,4 +24,5 @@ module.exports = {
   getTodos,
   getTodo,
   postTodo,
+  notFound,
 };

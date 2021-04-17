@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { makeExpressCallback } = require('./express-callback');
-const { getTodos, getTodo, postTodo } = require('./controllers');
+const { getTodos, getTodo, postTodo, notFound } = require('./controllers');
 
 const app = express();
 
@@ -11,9 +11,8 @@ app.use(express.json());
 
 app.get('/todos', makeExpressCallback(getTodos));
 app.post('/todos', makeExpressCallback(postTodo));
-app.patch('/todos/:id', makeExpressCallback());
 app.get('/todos/:id', makeExpressCallback(getTodo));
-app.delete('/todos/:id', makeExpressCallback());
+app.use(makeExpressCallback(notFound));
 
 const port = 3000;
 app.listen(port, () => {
