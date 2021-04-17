@@ -1,41 +1,41 @@
 'use strict';
 
-const { listTodo } = require('../use-cases');
 const { makeGetTodo } = require('./get-todo');
 const { makeFakeTodo } = require('../../__test__/fixtures/todo');
-const { makePostTodo } = require('./post-todo');
-const { addTodo } = require('../use-cases');
 
 describe('controllers, get todo', () => {
-  afterAll(async () => {
-    // delete todo api
-  });
-
   it('successfully get todo by id', async () => {
     // Arrange
     const todo = makeFakeTodo();
-    const postHttpRequest = {
-      body: {
-        ...todo,
+    const getTodo = makeGetTodo({
+      listTodo: ({ id }) => {
+        return { ...todo, _id: id };
+      },
+    });
+    const id = 'testid1234';
+    const request = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        id: id,
       },
     };
-
-    const postTodo = makePostTodo({ addTodo });
-    const postRes = await postTodo(postHttpRequest);
-    console.log(postRes);
-
-    const getTodo = makeGetTodo({ listTodo });
-    const httpRequest = {
-      params: {
-        id: postRes._id,
+    const expected = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode: 200,
+      body: {
+        ...todo,
+        _id: id,
       },
     };
 
     // Act
-    const res = await getTodo(httpRequest);
-    console.log(res);
+    const actual = await getTodo(request);
 
     // Assert
-    expect(res.statusCode).toEqual(200);
+    expect(actual).toEqual(expected);
   });
 });
