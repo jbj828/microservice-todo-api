@@ -26,6 +26,6 @@ describe('get todos controller', () => {
 
     // Assert
     expect(res.statusCode).toEqual(400);
-    expect(res.body.error).toEqual('hi error');
+    expect(res.body.error).toEqual('bang!');
   });
 });
