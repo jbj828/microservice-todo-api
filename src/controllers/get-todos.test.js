@@ -17,7 +17,7 @@ describe('get todos controller', () => {
     // Arrange
     const getTodos = await makeGetTodos({
       listTodos: () => {
-        throw Error('hi error');
+        throw Error('bang!');
       },
     });
 
