@@ -40,10 +40,9 @@ describe('data-access, todos-db', () => {
     // Arrange
     const todo = makeFakeTodo();
     const insert = await todosDb.insert({ todo });
-    const id = insert._id;
 
     // Act
-    const found = await todosDb.findById({ id });
+    const found = await todosDb.findById({ id: insert._id });
 
     // Assert
     expect(JSON.stringify(found)).toEqual(JSON.stringify(insert));
@@ -55,12 +54,11 @@ describe('data-access, todos-db', () => {
 
     // Act
     const insert = await todosDb.insert({ todo });
-    const id = insert._id;
 
     // Assert
     expect(JSON.stringify(insert)).toEqual(
       JSON.stringify({
-        _id: id,
+        _id: insert._id,
         ...todo,
       })
     );
