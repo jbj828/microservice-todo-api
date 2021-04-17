@@ -6,6 +6,9 @@ const { getTodos, getTodo, postTodo } = require('./controllers');
 
 const app = express();
 
+app.use(express.urlencoded());
+app.use(express.json());
+
 app.get('/todos', makeExpressCallback(getTodos));
 app.post('/todos', makeExpressCallback(postTodo));
 app.patch('/todos/:id', makeExpressCallback());
